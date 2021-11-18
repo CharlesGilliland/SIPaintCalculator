@@ -7,57 +7,68 @@ public class PaintCalculator {
         // Setting up scanner to get input from the user
         Scanner input = new Scanner(System.in);
 
+        // Welcome message
+        System.out.println("Welcome to The Paint Calculator!\nEnter your room details below");
+        System.out.println();
+
         // Getting the number of walls
         System.out.print("Enter the number of walls:");
-        int noOfWalls = input.nextInt();
+        int noOfWalls = Integer.parseInt(input.next());
 
         // Getting how many coats need to be done
         System.out.println("Enter the number of coats required:");
-        int noOfCoats = input.nextInt();
+        int noOfCoats = Integer.parseInt(input.next());
 
         // Getting the total surface area to be painted
         float totalArea = GetTotalArea(input, noOfWalls, noOfCoats);
 
         // Getting how large the tins of paint are
         System.out.println("Enter the size of your paint tin in litres");
-        float sizeOfCan = input.nextFloat();
+        float sizeOfCan = Float.parseFloat(input.next());
         float paintCoverageInMSq = 6;
 
-        // nextLine added to move on from nextFloat
-        input.nextLine();
 
         // Getting any areas not covered
         boolean areasStillMissing = true;
         float areaNotCoveredInMetersSq = 0;
-        System.out.println("Are their any areas not being painted? Enter y/n");
-        String answer = input.nextLine();
-        while(areasStillMissing){
-            switch(answer){
-                case "y":
+
+        System.out.println("Are their any areas not being painted? Enter y or n");
+        String answer = input.next();
+
+        do {
+            switch (answer) {
+                case "y" -> {
                     float area = GetAreaOfSurface(input);
                     areaNotCoveredInMetersSq += area;
 
+                    // Checking that the area not covered is smaller than the total area
+                    if (areaNotCoveredInMetersSq > totalArea) {
+                        System.out.println("The area not being painted cannot be larger than your total area");
+                        areaNotCoveredInMetersSq -= area;
+                    }
+
+                    // Checking for additional areas not painted
                     System.out.println("Are there any more? Enter y/n");
-                    input.nextLine();
-                    String result = input.nextLine();
-                    if(result.equals("n")){
+                    String result = input.next();
+                    if (result.equals("n")) {
                         areasStillMissing = false;
                     }
-                    break;
-                case "n":
-                    areasStillMissing = false;
-                    break;
-                default:
+                }
+                case "n" -> areasStillMissing = false;
+                default -> {
                     System.out.println("Enter either y or n");
                     answer = input.nextLine();
+                }
             }
-        }
+        } while(areasStillMissing);
+
+        // Taking away area that is not being painted
         totalArea -= areaNotCoveredInMetersSq;
 
         // Getting how many tins needed
         int totalNoOfTins = GetTotalTins(totalArea, sizeOfCan, paintCoverageInMSq);
-        System.out.println("For a room with a surface area of " + (totalArea/noOfCoats) + " meters.");
-        System.out.println("With a total of " + noOfCoats + " coats, totalling " + totalArea + "m squared.");
+        System.out.println("For a room with a surface area of " + (totalArea/noOfCoats) + " meters squared.");
+        System.out.println("With a total of " + noOfCoats + " coats, totalling " + totalArea + " meters squared.");
         System.out.println("The total number of " + sizeOfCan + " litre paint tins needed is: " + totalNoOfTins);
         System.out.println("** This is based upon 1 litre of paint covering 6m squared ** ");
     }
