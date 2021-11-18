@@ -42,10 +42,9 @@ public class PaintCalculator {
 
         // Getting how many tins needed
         int totalNoOfTins = GetTotalTins(totalArea, sizeOfCan, paintCoverageInMSq);
-        System.out.println("For a room with a surface area of " + (totalArea/noOfCoats) + " meters squared.");
-        System.out.println("With a total of " + noOfCoats + " coats, totalling " + totalArea + " meters squared.");
-        System.out.println("The total number of " + sizeOfCan + " litre paint tins needed is: " + totalNoOfTins);
-        System.out.println("** This is based upon 1 litre of paint covering 6m squared ** ");
+
+        // Displaying results
+        DisplayResults(totalArea, noOfCoats, sizeOfCan, totalNoOfTins);
 
     }
 
@@ -151,4 +150,10 @@ public class PaintCalculator {
         return areaNotCoveredInMetersSq;
     }
 
+    public static void DisplayResults(float totalArea, int noOfCoats, float sizeOfCan, int totalNoOfTins){
+        System.out.println("For a room with a surface area of " + (totalArea/noOfCoats) + " meters squared.");
+        System.out.println("With a total of " + noOfCoats + " coats, totalling " + totalArea + " meters squared.");
+        System.out.println("The total number of " + sizeOfCan + " litre paint tins needed is: " + totalNoOfTins);
+        System.out.println("** This is based upon 1 litre of paint covering 6m squared ** ");
+    }
 }
