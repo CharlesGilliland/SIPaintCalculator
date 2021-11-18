@@ -32,18 +32,24 @@ public class PaintCalculator {
         System.out.println("Are their any areas not being painted? Enter y/n");
         String answer = input.nextLine();
         while(areasStillMissing){
-            if(answer.equals("y")){
-                float area = GetAreaOfSurface(input);
-                areaNotCoveredInMetersSq += area;
+            switch(answer){
+                case "y":
+                    float area = GetAreaOfSurface(input);
+                    areaNotCoveredInMetersSq += area;
 
-                System.out.println("Are there any more? Enter y/n");
-                input.nextLine();
-                String result = input.nextLine();
-                if(result.equals("n")){
+                    System.out.println("Are there any more? Enter y/n");
+                    input.nextLine();
+                    String result = input.nextLine();
+                    if(result.equals("n")){
+                        areasStillMissing = false;
+                    }
+                    break;
+                case "n":
                     areasStillMissing = false;
-                }
-            } else if(answer.equals("n")){
-                areasStillMissing = false;
+                    break;
+                default:
+                    System.out.println("Enter either y or n");
+                    answer = input.nextLine();
             }
         }
         totalArea -= areaNotCoveredInMetersSq;
