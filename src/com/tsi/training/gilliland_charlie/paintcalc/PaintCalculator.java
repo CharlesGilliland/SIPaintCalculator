@@ -1,4 +1,4 @@
-package com.tsi.training.gilliland.charlie.paintcalc;
+package com.tsi.training.gilliland_charlie.paintcalc;
 
 import java.util.Scanner;
 
