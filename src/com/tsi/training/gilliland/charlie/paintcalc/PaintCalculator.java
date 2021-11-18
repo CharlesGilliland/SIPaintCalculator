@@ -60,10 +60,9 @@ public class PaintCalculator {
     }
 
     public static int GetTotalTins(float area, float sizeOfTin, float paintCoverageByMSq){
-        // Area covered by paint is estimated at 6m squared per 1 litre of paint
+        // Area covered by paint is estimated at 6 m squared per 1 litre of paint
         float areaCovered = paintCoverageByMSq * sizeOfTin;
         float exactAmountOfTins = area/areaCovered;
-        int totalNoTins = (int)(Math.ceil(exactAmountOfTins));
-        return totalNoTins;
+        return (int)(Math.ceil(exactAmountOfTins));
     }
 }
