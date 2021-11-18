@@ -23,10 +23,32 @@ public class PaintCalculator {
         float sizeOfCan = input.nextFloat();
         float paintCoverageInMSq = 6;
 
+        // nextLine added to move on from nextFloat
+        input.nextLine();
+
         // Getting any areas not covered
-        System.out.println("Are their any areas not covered? If so, enter \"y\"");
-        String answer = input.nextLine();
-        // CARRY ON FROM HERE
+        boolean areasStillMissing = true;
+        float areaNotCoveredInMetersSq = 0;
+        while(areasStillMissing){
+
+            System.out.println("Are their any areas not being painted? Enter y/n");
+            String answer = input.nextLine();
+
+            if(answer.equals("y")){
+                float area = GetAreaOfSurface(input);
+                areaNotCoveredInMetersSq += area;
+                System.out.println("Are there any more? Enter y/n");
+                input.nextLine();
+                String result = input.nextLine();
+                if(result.equals("n")){
+                    areasStillMissing = false;
+                }
+            } else if(answer.equals("n")){
+                areasStillMissing = false;
+            }
+        }
+        totalArea -= areaNotCoveredInMetersSq;
+
 
 
         // Getting how many tins needed
@@ -64,5 +86,13 @@ public class PaintCalculator {
         float areaCovered = paintCoverageByMSq * sizeOfTin;
         float exactAmountOfTins = area/areaCovered;
         return (int)(Math.ceil(exactAmountOfTins));
+    }
+
+    public static float GetAreaOfSurface(Scanner input){
+        System.out.println("Enter the height of the surface in meters: ");
+        float heightInMeters = input.nextFloat();
+        System.out.println("Enter the width of the surface in meters: ");
+        float widthInMeters = input.nextFloat();
+        return heightInMeters * widthInMeters;
     }
 }
