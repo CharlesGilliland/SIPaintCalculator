@@ -22,7 +22,9 @@ public class PaintCalculator {
 
         // Getting the wall dimensions
         float[][] wallDimensions = GetWallDimensions(input, noOfWalls);
-        System.out.println(Arrays.deepToString(wallDimensions));
+
+        // Displaying wall dimensions
+        DisplayWallDimensions(wallDimensions);
 
         // Getting the total surface area to be painted
         float totalArea = GetTotalArea(wallDimensions, noOfWalls, noOfCoats);
@@ -51,7 +53,7 @@ public class PaintCalculator {
         float[][] wallDimensions = new float[noOfWalls][2];
         for(int i = 0; i < noOfWalls; i++){
             for(int j = 0; j < 2 ; j++){
-                if(j == 1){
+                if(j == 0){
                     System.out.println("Enter the height of wall " + (i+1) + " in meters: ");
                     float heightInMeters = input.nextFloat();
                     wallDimensions[i][j] = heightInMeters;
@@ -63,6 +65,21 @@ public class PaintCalculator {
             }
         }
         return wallDimensions;
+    }
+
+    public static void DisplayWallDimensions(float[][] wallDimensions){
+        for(int i = 0; i < wallDimensions.length; i++){
+            System.out.println("Dimensions for wall " + (i + 1) + ":");
+            for (int j = 0; j < 2; j++){
+                if(j == 0){
+                    System.out.println("Height: " + wallDimensions[i][j]);
+                } else {
+                    System.out.println("Width: " + wallDimensions[i][j]);
+                }
+            }
+        }
+        // Extra print statement for console formatting
+        System.out.println();
     }
 
     public static float GetTotalArea(float[][] wallDimensions, int noOfWalls, int noOfCoats){
@@ -133,4 +150,5 @@ public class PaintCalculator {
         } while (areasStillMissing);
         return areaNotCoveredInMetersSq;
     }
+
 }
